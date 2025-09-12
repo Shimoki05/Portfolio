@@ -388,7 +388,7 @@
           <span class="text-[var(--neon-blue)]">Maynard Roi</span>
         </h1>
         <div class="h-8 mb-8">
-          <span class="typing text-xl md:text-2xl text-white">Computer Science Student | Front End Developer</span>
+          <span class="typing text-xl md:text-2xl text-white">Ui Designer </span>
         </div>
         <a href="#about" class="btn-neon bg-transparent border-2 border-[var(--neon-blue)] text-[var(--neon-blue)] py-3 px-8 rounded-full font-medium hover:bg-[var(--neon-blue)] hover:text-[var(--dark-bg)] transition-all mt-4 inline-block">
           View More
@@ -635,8 +635,11 @@
 
   <!-- Project Image Modal -->
   <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
-    <div class="relative">
-      <img id="modal-img" src="" alt="Project Full" class="max-w-full max-h-[80vh] rounded-lg shadow-2xl border-4 border-[var(--neon-blue)]">
+    <div class="relative bg-[rgba(10,10,20,0.95)] rounded-lg p-6 flex flex-col items-center max-w-lg w-full">
+      <img id="modal-img" src="" alt="Project Full" class="max-w-full max-h-[60vh] rounded-lg shadow-2xl border-4 border-[var(--neon-blue)] mb-6">
+      <h3 id="modal-title" class="text-2xl font-bold text-white mb-3 text-center"></h3>
+      <p id="modal-desc" class="text-gray-300 mb-4 text-center"></p>
+      <div id="modal-tech" class="flex flex-wrap justify-center mb-4"></div>
       <button id="close-modal" class="absolute top-2 right-2 text-white text-2xl bg-[var(--neon-blue)] rounded-full px-3 py-1 hover:bg-white hover:text-[var(--neon-blue)] transition">
         &times;
       </button>
@@ -687,7 +690,7 @@
     });
     
     // Typing effect for multiple phrases
-    const phrases = ["Computer Science Student", "Web Developer", "Machine Learning Enthusiast"];
+    const phrases = ["Computer Science Student", "Ui Designer",  "Figma Designer"];
     let currentPhrase = 0;
     let currentChar = 0;
     let isDeleting = false;
@@ -698,7 +701,7 @@
     
     function typeEffect() {
       const phrase = phrases[currentPhrase];
-      
+
       if (isDeleting) {
         typingElement.textContent = phrase.substring(0, currentChar - 1);
         currentChar--;
@@ -706,9 +709,9 @@
         typingElement.textContent = phrase.substring(0, currentChar + 1);
         currentChar++;
       }
-      
+
       let typingSpeed = isDeleting ? erasingDelay : typingDelay;
-      
+
       if (!isDeleting && currentChar === phrase.length) {
         // Pause at the end of typing
         typingSpeed = newPhraseDelay;
@@ -717,7 +720,7 @@
         isDeleting = false;
         currentPhrase = (currentPhrase + 1) % phrases.length;
       }
-      
+
       setTimeout(typeEffect, typingSpeed);
     }
     
@@ -775,16 +778,50 @@
       });
     });
 
-    // Project Modal Logic
+    // Project Modal Logic with Description
     const modal = document.getElementById('project-modal');
     const modalImg = document.getElementById('modal-img');
     const closeModal = document.getElementById('close-modal');
     const viewBtns = document.querySelectorAll('.view-project');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalTech = document.getElementById('modal-tech');
+
+    // Project details for modal
+    const projectDetails = {
+      "./images/NCFood.png": {
+        title: "NC Food Canteen",
+        desc: "A C# based canteen inventory management system for Norzagaray College, streamlining food orders and inventory.",
+        tech: ["C#", "Windows Forms"]
+      },
+      "./images/SioDelivery.png": {
+        title: "Sio Delivery",
+        desc: "A VB.NET delivery ordering system for storing foods in the inventory and delivering food orders.",
+        tech: ["VB.NET", "Windows Forms"]
+      },
+      "./images/Figma.png": {
+        title: "Vibes",
+        desc: "A modern mobile app UI/UX design created in Figma, focused on designing an entertainment application.",
+        tech: ["Figma", "Mobile App Design"]
+      },
+      "./images/VirtualSchool.png": {
+        title: "Virtual School Task Reminder",
+        desc: "A C# application for managing and reminding students of school tasks. Currently in development.",
+        tech: ["C#", "Windows Forms", "In Development"]
+      }
+    };
 
     viewBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const imgSrc = btn.getAttribute('data-img');
         modalImg.src = imgSrc;
+        // Set modal details
+        const details = projectDetails[imgSrc];
+        modalTitle.textContent = details ? details.title : "";
+        modalDesc.textContent = details ? details.desc : "";
+        modalTech.innerHTML = details && details.tech
+          ? details.tech.map(t => `<span class="tech-badge">${t}</span>`).join(" ")
+          : "";
         modal.classList.remove('hidden');
       });
     });
@@ -794,7 +831,6 @@
       modalImg.src = '';
     });
 
-    // Close modal on background click
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
         modal.classList.add('hidden');
