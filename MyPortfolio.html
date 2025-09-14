@@ -53,7 +53,7 @@
     .navbar {
       background-color: rgba(10, 10, 20, 0.8);
       backdrop-filter: blur(10px);
-      box-shadow: 0 5px 15px rgba(0, 242, 255, 0.1);
+      box-shadow: 0 5px 15px rgba(0,242,255,0.1);
     }
     
     .nav-link {
@@ -334,6 +334,64 @@
       background: rgba(255, 0, 0, 0.1);
       border: 1px solid rgba(255, 0, 0, 0.3);
     }
+
+    /* Neon border for volleyball images */
+    .neon-border {
+      border: 3px solid var(--neon-blue);
+      box-shadow: 0 0 16px 2px var(--neon-blue), 0 0 32px 4px rgba(0,242,255,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .neon-photo-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .neon-border:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 7px 3px var(--neon-blue), 0 0 7px 3px rgba(0,242,255,0.5);
+      z-index: 2;
+    }
+
+    /* Hero Section Neon Animated Border */
+    .about-img.hero-animated {
+      position: relative;
+      z-index: 1;
+    }
+    .about-img.hero-animated::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      padding: 6px;
+      background: conic-gradient(
+        var(--neon-blue) 0deg, 
+        #fff 90deg, 
+        var(--neon-blue) 180deg, 
+        #fff 270deg, 
+        var(--neon-blue) 360deg
+      );
+      animation: neon-spin 2.5s linear infinite;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .about-img.hero-animated img {
+      position: relative;
+      z-index: 3;
+    }
+    @keyframes neon-spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Add this to your <style id="app-style"> block or main CSS */
+    .nav-link.active {
+      color: var(--neon-blue) !important;
+    }
+    .nav-link.active::after {
+      width: 100%;
+      background-color: var(--neon-blue);
+    }
   </style>
 </head>
 <body class="bg-gradient">
@@ -375,13 +433,11 @@
   <section id="home" class="hero flex items-center justify-center px-6">
     <div class="hero-grid"></div>
     <div class="container mx-auto flex flex-col items-center justify-center hero-content text-center">
-     
       <div class="w-full flex justify-center mb-8" data-aos="fade-down">
-        <div class="relative w-60 h-60 md:w-80 md:h-80 rounded-full overflow-hidden about-img">
-          <img src="./images/Roi-1.jpg" alt="Profile Photo" class="w-full h-full object-cover">
+        <div class="relative w-60 h-60 md:w-80 md:h-80 rounded-full overflow-hidden about-img hero-animated neon-photo-wrapper">
+          <img src="./images/Roi-1.jpg" alt="Profile Photo" class="w-full h-full object-cover neon-border cursor-pointer home-profile-img" data-img="./images/Roi-1.jpg">
         </div>
       </div>
-      
       <div class="w-full" data-aos="fade-up">
         <h1 class="text-5xl md:text-7xl font-bold mb-6">
           <span class="text-white">Hello, I'm </span>
@@ -403,21 +459,17 @@
       <h2 class="section-title text-3xl md:text-4xl font-bold mb-16 text-center" data-aos="fade-up">
         About <span class="text-[var(--neon-blue)]">Me</span>
       </h2>
-      
       <div class="flex flex-col lg:flex-row items-center gap-12">
         <div class="lg:w-1/3 flex justify-center" data-aos="fade-right">
-          <div class="relative w-90 h-90 rounded-full overflow-hidden about-img">
-            <img src="./images/Roi3.jpg" alt="Profile Photo" class="w-full h-full object-cover">
+          <div class="relative w-90 h-90 rounded-full overflow-hidden about-img neon-photo-wrapper">
+            <img src="./images/Roi3.jpg" alt="Profile Photo" class="w-full h-full object-cover neon-border cursor-pointer about-profile-img" data-img="./images/Roi3.jpg">
           </div>
         </div>
-        
         <div class="lg:w-2/3" data-aos="fade-left">
-          <h3 class="text-2xl font-semibold mb-4">Computer Science Student</h3>
+          <h3 class="text-2xl font-semibold mb-4">Know more about me</h3>
           <p class="text-gray-300 mb-6">
             Hello! I'm Maynard Roi Espiritu and I'm 20 years old and I'm a passionate Computer Science student from Norzagaray College, eager to build my skills and create. My current focus is on developing applications using C# and VB.NET. I enjoy the process of bringing ideas to life through code, and I'm always looking for opportunities to learn and grow as a developer.
           </p>
-          
-          
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div class="flex items-center">
               <i class="fas fa-graduation-cap text-[var(--neon-blue)] mr-3 text-xl"></i>
@@ -447,6 +499,65 @@
                 <p class="text-gray-400 text-sm">Filipino, Bisaya</p>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Volleyball Section -->
+  <section id="volleyball" class="py-20 px-6 bg-opacity-30 bg-black">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-12">
+        <!-- Volleyball Description Left -->
+        <div class="md:w-1/2" data-aos="fade-right">
+          <h2 class="text-4xl font-bold mb-6">
+            <span style="color: white;">Volley</span><span style="color: var(--neon-blue);">ball</span>
+          </h2>
+          <p class="text-gray-300 mb-6 text-lg">
+            Volleyball is not just a sport for me—it's a passion that has taught me discipline, teamwork, and perseverance. I may not be the best player on the court, but I give my all in every game and practice session.
+            It makes me happy to be part of a team where we support and motivate each other to improve. 
+          </p>
+          <p class="text-gray-300 text-lg">
+            Whether it's training sessions, tournaments, or friendly games, volleyball has helped me build confidence and lasting friendships. I am always eager to improve my skills and contribute to my team's success in the court.
+          </p>
+        </div>
+        <!-- Volleyball Photos Right -->
+        <div class="md:w-1/2 grid grid-cols-2 gap-6" data-aos="fade-left">
+          <div class="neon-photo-wrapper">
+            <img src="./images/Vb1.jpg" alt="Volleyball 1" class="rounded-lg shadow-lg cursor-pointer volleyball-img neon-border object-cover w-full h-70" data-img="./images/Vb1.jpg">
+          </div>
+          <div class="neon-photo-wrapper">
+            <img src="./images/Vb2.jpg" alt="Volleyball 2" class="rounded-lg shadow-lg cursor-pointer volleyball-img neon-border object-cover w-full h-70" data-img="./images/Vb2.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section id="achievements" class="py-20 px-6">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-12">
+        <!-- Achievements Description Left -->
+        <div class="md:w-1/2" data-aos="fade-right">
+          <h2 class="text-4xl font-bold mb-6">
+            <span style="color: white;">My</span><span style="color: var(--neon-blue);">Achievements</span>
+          </h2>
+          <p class="text-gray-300 mb-6 text-lg">
+            My journey is filled with memorable achievements that I am proud of. These achievements inspire me to keep pushing my limits and to strive for excellence in everything I do. I am grateful for every opportunity and challenge that has helped me become a better version of myself.
+          </p>
+        </div>
+        <!-- Achievements Photos Right -->
+        <div class="md:w-1/2 grid grid-cols-2 gap-6" data-aos="fade-left">
+          <div class="neon-photo-wrapper flex flex-col items-center col-span-1">
+            <img src="./images/Vb5.jpg" alt="Achievement 1" class="rounded-lg shadow-lg cursor-pointer achievement-img neon-border object-cover w-full h-100 mb-2" data-img="./images/Vb5.jpg">
+          </div>
+          <div class="neon-photo-wrapper flex flex-col items-center col-span-1">
+            <img src="./images/Vb4.jpg" alt="Achievement 2" class="rounded-lg shadow-lg cursor-pointer achievement-img neon-border object-cover w-full h-100 mb-2" data-img="./images/Vb4.jpg">
+          </div>
+          <div class="col-span-2">
+            <span class="block text-gray-300 text-center text-sm mt-2">Foundation Week Volleyball Champion 2024</span>
           </div>
         </div>
       </div>
@@ -497,7 +608,7 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Project 1: NC Food Canteen (C#) -->
         <div class="project-card" data-aos="zoom-in">
-          <img src="./images/NCFood.png" alt="NC Food Canteen" class="w-full h-48 object-cover">
+          <img src="./images/NCFood.png" alt="NC Food Canteen" class="w-full h-48 object-cover project-img" data-img="./images/NCFood.png">
           <div class="p-6">
             <h3 class="text-xl font-bold mb-3">NC Food Canteen</h3>
             <p class="text-gray-400 mb-4 text-sm">A C# based canteen inventory management system for Norzagaray College, streamlining food orders and inventory.</p>
@@ -506,17 +617,15 @@
               <span class="tech-badge">C#</span>
               <span class="tech-badge">Windows Forms</span>
             </div>
-          </div>
-          <div class="project-overlay">
-            <a href="javascript:void(0)" class="btn-neon view-project bg-transparent border-2 border-[var(--neon-blue)] text-[var(--neon-blue)] py-2 px-6 rounded-full text-sm font-medium hover:bg-[var(--neon-blue)] hover:text-[var(--dark-bg)] transition-all"
-               data-img="./images/NCFood.png">
+            <button class="btn-neon view-project bg-transparent border-2 border-[var(--neon-blue)] text-[var(--neon-blue)] py-2 px-6 rounded-full text-sm font-medium hover:bg-[var(--neon-blue)] hover:text-[var(--dark-bg)] transition-all mt-2"
+              data-img="./images/NCFood.png">
               View Project
-            </a>
+            </button>
           </div>
         </div>
         <!-- Project 2: Sio Delivery (VB.NET) -->
         <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
-          <img src="./images/SioDelivery.png" alt="Sio Delivery" class="w-full h-48 object-cover">
+          <img src="./images/SioDelivery.png" alt="Sio Delivery" class="w-full h-48 object-cover project-img" data-img="./images/SioDelivery.png">
           <div class="p-6">
             <h3 class="text-xl font-bold mb-3">Sio Delivery</h3>
             <p class="text-gray-400 mb-4 text-sm">A VB.NET delivery ordering system for storing foods in the inventory and Delivering food orders.</p>
@@ -525,17 +634,15 @@
               <span class="tech-badge">VB.NET</span>
               <span class="tech-badge">Windows Forms</span>
             </div>
-          </div>
-          <div class="project-overlay">
-            <a href="javascript:void(0)" class="btn-neon view-project bg-transparent border-2 border-[var(--neon-blue)] text-[var(--neon-blue)] py-2 px-6 rounded-full text-sm font-medium hover:bg-[var(--neon-blue)] hover:text-[var(--dark-bg)] transition-all"
-               data-img="./images/SioDelivery.png">
+            <button class="btn-neon view-project bg-transparent border-2 border-[var(--neon-blue)] text-[var(--neon-blue)] py-2 px-6 rounded-full text-sm font-medium hover:bg-[var(--neon-blue)] hover:text-[var(--dark-bg)] transition-all mt-2"
+              data-img="./images/SioDelivery.png">
               View Project
-            </a>
+            </button>
           </div>
         </div>
         <!-- Project 3: Vibes (Figma Mobile App Design) -->
         <div class="project-card" data-aos="zoom-in" data-aos-delay="200">
-          <img src="./images/Figma.png" alt="Vibes Mobile App Design" class="w-full h-48 object-cover">
+          <img src="./images/Figma.png" alt="Vibes Mobile App Design" class="w-full h-48 object-cover project-img" data-img="./images/Figma.png">
           <div class="p-6">
             <h3 class="text-xl font-bold mb-3">Vibes</h3>
             <p class="text-gray-400 mb-4 text-sm">A modern mobile app UI/UX design created in Figma, focused on designing an entertainment application.</p>
@@ -544,17 +651,15 @@
               <span class="tech-badge">Figma</span>
               <span class="tech-badge">Mobile App Design</span>
             </div>
-          </div>
-          <div class="project-overlay">
-            <a href="javascript:void(0)" class="btn-neon view-project bg-transparent border-2 border-[var(--neon-blue)] text-[var(--neon-blue)] py-2 px-6 rounded-full text-sm font-medium hover:bg-[var(--neon-blue)] hover:text-[var(--dark-bg)] transition-all"
-               data-img="./images/Figma.png">
-               View Project
-            </a>
+            <button class="btn-neon view-project bg-transparent border-2 border-[var(--neon-blue)] text-[var(--neon-blue)] py-2 px-6 rounded-full text-sm font-medium hover:bg-[var(--neon-blue)] hover:text-[var(--dark-bg)] transition-all mt-2"
+              data-img="./images/Figma.png">
+              View Project
+            </button>
           </div>
         </div>
         <!-- Project 4: Virtual School Task Reminder (C#) -->
         <div class="project-card" data-aos="zoom-in" data-aos-delay="300">
-          <img src="./images/VirtualSchool.png" alt="Virtual School Task Reminder" class="w-full h-48 object-cover">
+          <img src="./images/VirtualSchool.png" alt="Virtual School Task Reminder" class="w-full h-48 object-cover project-img" data-img="./images/VirtualSchool.png">
           <div class="p-6">
             <h3 class="text-xl font-bold mb-3">Virtual School Task Reminder</h3>
             <p class="text-gray-400 mb-4 text-sm">A C# application for managing and reminding students of school tasks. Currently in development.</p>
@@ -564,12 +669,10 @@
               <span class="tech-badge">Windows Forms</span>
               <span class="tech-badge">In Development</span>
             </div>
-          </div>
-          <div class="project-overlay">
-            <a href="javascript:void(0)" class="btn-neon view-project bg-transparent border-2 border-[var(--neon-blue)] text-[var(--neon-blue)] py-2 px-6 rounded-full text-sm font-medium hover:bg-[var(--neon-blue)] hover:text-[var(--dark-bg)] transition-all"
-               data-img="./images/VirtualSchool.png">
-                 View Project
-            </a>
+            <button class="btn-neon view-project bg-transparent border-2 border-[var(--neon-blue)] text-[var(--neon-blue)] py-2 px-6 rounded-full text-sm font-medium hover:bg-[var(--neon-blue)] hover:text-[var(--dark-bg)] transition-all mt-2"
+              data-img="./images/VirtualSchool.png">
+              View Project
+            </button>
           </div>
         </div>
       </div>
@@ -638,14 +741,27 @@
     </div>
   </footer>
 
-  <!-- Project Image Modal -->
-  <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
-    <div class="relative bg-[rgba(10,10,20,0.95)] rounded-lg p-6 flex flex-col items-center max-w-lg w-full">
-      <img id="modal-img" src="" alt="Project Full" class="max-w-full max-h-[60vh] rounded-lg shadow-2xl border-4 border-[var(--neon-blue)] mb-6">
-      <h3 id="modal-title" class="text-2xl font-bold text-white mb-3 text-center"></h3>
-      <p id="modal-desc" class="text-gray-300 mb-4 text-center"></p>
-      <div id="modal-tech" class="flex flex-wrap justify-center mb-4"></div>
-      <button id="close-modal" class="absolute top-2 right-2 text-white text-2xl bg-[var(--neon-blue)] rounded-full px-3 py-1 hover:bg-white hover:text-[var(--neon-blue)] transition">
+  <!-- Project & Gallery Image Modal  -->
+  <div id="gallery-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+    <div class="relative bg-[rgba(10,10,20,0.95)] rounded-lg p-4 flex flex-col items-center max-w-2xl w-full">
+      <img id="gallery-modal-img" src="" alt="Full Size" class="max-w-full max-h-[80vh] rounded-lg shadow-2xl border-4 border-[var(--neon-blue)] mb-2">
+      <button id="close-gallery-modal" class="absolute top-2 right-2 text-white text-2xl bg-[var(--neon-blue)] rounded-full px-3 py-1 hover:bg-white hover:text-[var(--neon-blue)] transition">
+        &times;
+      </button>
+    </div>
+  </div>
+
+  <!-- Add this after your existing gallery modal -->
+  <div id="project-gallery-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+    <div class="relative bg-[rgba(10,10,20,0.95)] rounded-lg p-4 flex flex-col items-center max-w-2xl w-full">
+      <button id="project-gallery-prev" class="absolute left-2 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-[var(--neon-blue)] rounded-full px-3 py-1 hover:bg-white hover:text-[var(--neon-blue)] transition z-10">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <img id="project-gallery-img" src="" alt="Project Gallery" class="max-w-full max-h-[80vh] rounded-lg shadow-2xl border-4 border-[var(--neon-blue)] mb-2">
+      <button id="project-gallery-next" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-white text-3xl bg-[var(--neon-blue)] rounded-full px-3 py-1 hover:bg-white hover:text-[var(--neon-blue)] transition z-10">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <button id="close-project-gallery-modal" class="absolute top-2 right-2 text-white text-2xl bg-[var(--neon-blue)] rounded-full px-3 py-1 hover:bg-white hover:text-[var(--neon-blue)] transition">
         &times;
       </button>
     </div>
@@ -842,6 +958,192 @@
         modalImg.src = '';
       }
     });
+  </script>
+
+  <script id="gallery-script">
+  // Volleyball & Achievements Modal Logic
+  const galleryModal = document.getElementById('gallery-modal');
+  const galleryModalImg = document.getElementById('gallery-modal-img');
+  const closeGalleryModal = document.getElementById('close-gallery-modal');
+
+  // For volleyball images
+  document.querySelectorAll('.volleyball-img').forEach(img => {
+    img.addEventListener('click', () => {
+      galleryModalImg.src = img.getAttribute('data-img');
+      galleryModal.classList.remove('hidden');
+    });
+  });
+
+  // For achievement images
+  document.querySelectorAll('.achievement-img').forEach(img => {
+    img.addEventListener('click', () => {
+      galleryModalImg.src = img.getAttribute('data-img');
+      galleryModal.classList.remove('hidden');
+    });
+  });
+
+  // For project images
+  document.querySelectorAll('.project-img').forEach(img => {
+    img.addEventListener('click', () => {
+      galleryModalImg.src = img.getAttribute('data-img');
+      galleryModal.classList.remove('hidden');
+    });
+  });
+
+  closeGalleryModal.addEventListener('click', () => {
+    galleryModal.classList.add('hidden');
+    galleryModalImg.src = '';
+  });
+
+  galleryModal.addEventListener('click', (e) => {
+    if (e.target === galleryModal) {
+      galleryModal.classList.add('hidden');
+      galleryModalImg.src = '';
+    }
+  });
+
+  // Add click event for Home and About profile images to open in modal
+  document.querySelectorAll('.home-profile-img, .about-profile-img').forEach(img => {
+    img.addEventListener('click', () => {
+      galleryModalImg.src = img.getAttribute('data-img');
+      galleryModal.classList.remove('hidden');
+    });
+  });
+
+  // Active nav-link on scroll and click
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function activateNavLinkOnScroll() {
+    let scrollY = window.pageYOffset;
+    let navbarHeight = document.querySelector('.navbar').offsetHeight;
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - navbarHeight - 10;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute('id');
+
+      if (
+        scrollY >= sectionTop &&
+        scrollY < sectionTop + sectionHeight
+      ) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${sectionId}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }
+
+  // Run on scroll and on load
+  window.addEventListener('scroll', activateNavLinkOnScroll);
+  window.addEventListener('DOMContentLoaded', activateNavLinkOnScroll);
+
+  // Also update on click for instant feedback
+  navLinks.forEach(link => {
+    link.addEventListener('click', function () {
+      navLinks.forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Add this for the View Project buttons in Projects section
+  document.querySelectorAll('.view-project').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const galleryModal = document.getElementById('gallery-modal');
+      const galleryModalImg = document.getElementById('gallery-modal-img');
+      galleryModalImg.src = this.getAttribute('data-img');
+      galleryModal.classList.remove('hidden');
+    });
+  });
+
+  // Project Gallery Modal Logic
+  const projectGalleries = {
+    // Project 1: NC Food Canteen
+    "NCFood": [
+      "./images/NcFood1.png",
+      "./images/NCFood2.png"
+    ],
+    // Project 2: Sio Delivery
+    "SioDelivery": [
+      "./images/SioDelivery1.png",
+      "./images/SioDelivery2.png",
+      "./images/SioDelivery3.png"
+    ],
+    // Project 3: Figma (Vibes)
+    "Figma": [
+      "./images/Figma1.png",
+      "./images/Figma2.png",
+      "./images/Figma3.png"
+    ]
+  };
+
+  let currentGallery = [];
+  let currentGalleryIndex = 0;
+
+  const projectGalleryModal = document.getElementById('project-gallery-modal');
+  const projectGalleryImg = document.getElementById('project-gallery-img');
+  const closeProjectGalleryModal = document.getElementById('close-project-gallery-modal');
+  const projectGalleryPrev = document.getElementById('project-gallery-prev');
+  const projectGalleryNext = document.getElementById('project-gallery-next');
+
+  // Open gallery for Project 1
+  document.querySelector('.view-project[data-img="./images/NCFood.png"]').addEventListener('click', function(e) {
+    e.preventDefault();
+    currentGallery = projectGalleries["NCFood"];
+    currentGalleryIndex = 0;
+    showProjectGalleryImage();
+    projectGalleryModal.classList.remove('hidden');
+  });
+
+  // Open gallery for Project 2
+  document.querySelector('.view-project[data-img="./images/SioDelivery.png"]').addEventListener('click', function(e) {
+    e.preventDefault();
+    currentGallery = projectGalleries["SioDelivery"];
+    currentGalleryIndex = 0;
+    showProjectGalleryImage();
+    projectGalleryModal.classList.remove('hidden');
+  });
+
+  // Open gallery for Project 3 (Figma)
+  document.querySelector('.view-project[data-img="./images/Figma.png"]').addEventListener('click', function(e) {
+    e.preventDefault();
+    currentGallery = projectGalleries["Figma"];
+    currentGalleryIndex = 0;
+    showProjectGalleryImage();
+    projectGalleryModal.classList.remove('hidden');
+  });
+
+  function showProjectGalleryImage() {
+    projectGalleryImg.src = currentGallery[currentGalleryIndex];
+  }
+
+  projectGalleryPrev.addEventListener('click', function(e) {
+    e.stopPropagation();
+    currentGalleryIndex = (currentGalleryIndex - 1 + currentGallery.length) % currentGallery.length;
+    showProjectGalleryImage();
+  });
+
+  projectGalleryNext.addEventListener('click', function(e) {
+    e.stopPropagation();
+    currentGalleryIndex = (currentGalleryIndex + 1) % currentGallery.length;
+    showProjectGalleryImage();
+  });
+
+  closeProjectGalleryModal.addEventListener('click', function() {
+    projectGalleryModal.classList.add('hidden');
+    projectGalleryImg.src = '';
+  });
+
+  // Close modal on background click
+  projectGalleryModal.addEventListener('click', function(e) {
+    if (e.target === projectGalleryModal) {
+      projectGalleryModal.classList.add('hidden');
+      projectGalleryImg.src = '';
+    }
+  });
   </script>
 </body>
 </html>
